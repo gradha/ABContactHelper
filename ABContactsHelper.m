@@ -117,6 +117,21 @@
 	return contacts;
 }
 
++ (NSArray *) contactsMatchingFirstName: (NSString *) fname lastName: (NSString *) lname
+{
+	NSPredicate *pred;
+	NSArray *contacts = [ABContactsHelper contacts];
+	if (fname.length > 0) {
+		pred = [NSPredicate predicateWithFormat:@"firstname like %@", fname];
+		contacts = [contacts filteredArrayUsingPredicate:pred];
+	}
+	if (lname.length > 0) {
+		pred = [NSPredicate predicateWithFormat:@"lastname like %@", lname];
+		contacts = [contacts filteredArrayUsingPredicate:pred];
+	}
+	return contacts;
+}
+
 + (NSArray *) contactsMatchingPhone: (NSString *) number
 {
 	NSPredicate *pred;
